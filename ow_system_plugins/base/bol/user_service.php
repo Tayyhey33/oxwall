@@ -1887,10 +1887,6 @@ final class BOL_UserService
                                 $questionData[$userId][$question['name']] = date("m/d/Y", $value);
                             }
 
-                            if (OW::getPluginManager()->isPluginActive('advancedmoderation') && ($question['name'] == 'activityStamp' || $question['name'] == 'joinStamp')) {
-                                $questionData[$userId][$question['name']] = ADVANCEDMODERATION_BOL_Service::getInstance()->customFormatDate($value) . ', ' . $questionData[$userId][$question['name']];
-                            }
-
                             break;
 
                         case BOL_QuestionService::QUESTION_PRESENTATION_BIRTHDATE:
@@ -2015,12 +2011,6 @@ final class BOL_UserService
                             else
                             {
                                 unset($questionArray[$sectionKey]);
-                            }
-
-                            if ($question['name'] == 'joinIp' && OW::getPluginManager()->isPluginActive('showip')) {
-                                if (is_numeric($value) && ctype_digit($value)) {
-                                    $questionData[$userId][$question['name']] = SHOWIP_BOL_Service::getInstance()->intToIPv4($value);
-                                }
                             }
 
                             break;
